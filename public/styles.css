@@ -240,3 +240,11 @@ _:-ms-input-placeholder, :root .demo-graph {
       -ms-flex-align: center;
           align-items: center;
 }
+.mdl-layout__content > ons-tabbar{
+  position:absolute;
+  top:68px;
+  left:240px;
+  width:400px;
+  height:90%;
+  z-index:10000;
+}
