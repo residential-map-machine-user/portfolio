@@ -18,6 +18,19 @@ html, body {
   height: 100%;
   font-family: 'Roboto', 'Helvetica', sans-serif;
 }
+.clearfix{
+}
+.clearfix:before{
+  content:" ";
+  display:table;
+}
+.clearfix:after{
+  content:" ";
+  display:table;
+}
+.clearfix:after{
+  clear:both;
+}
 .demo-avatar {
   width: 48px;
   height: 48px;
@@ -177,7 +190,18 @@ _:-ms-input-placeholder, :root .demo-graph {
 .demo-graph:nth-child(2) {
   color: #d9006e;
 }
-
+@media (min-width: 1024px){
+  
+  .demo-content ons-tabbar {
+    position:fixed;
+    top:24px;
+    left:240px;
+  }
+}
+.demo-content ons-tabbar {
+  position:fixed;
+  top:68px;
+}
 .demo-cards {
   -webkit-box-align: start;
   -webkit-align-items: flex-start;
@@ -247,4 +271,10 @@ _:-ms-input-placeholder, :root .demo-graph {
   width:400px;
   height:90%;
   z-index:10000;
+}
+.text-input{
+  position:fixed;
+  bottom:49px;
+  background-color:white;
+  width:100%;
 }
