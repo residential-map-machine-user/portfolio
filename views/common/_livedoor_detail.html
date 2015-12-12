@@ -1,1 +1,100 @@
-<h1>hello livedoor</h1>
+<div class="mdl-cell--12-col self_padding-20">
+<h1>Livedoorニュース</h1>
+
+	<a href="http://rss-reader-live.cloudapp.vet/LiveDoorNews/front/news">リリース</a>
+<a href="https://github.com/shghdyji/LiveDoorNews" target="_blank" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">View Source</a>
+
+<h2>要求</h2>
+<hr>
+<p>Live door newsのRSSを取得してパース<br>
+RSSに含まれる内容からURLを取得<br>
+記事のページからTitleと内容を取得<br>
+関連する記事の表示</p>
+
+<h2>scraping</h2>
+
+<hr>
+<p>jauntを使用してscraping(無料なのは一ヶ月だけ)</p>
+
+<h2>関連する記事の実装</h2>
+
+<hr>
+<h3>Apache luceneの全文検索エンジンを仕様して形態素解析</h3>
+
+<p>タイトルをキーとしてコンテンツを全文検索してさらにIndexを作成する<br>
+関連殿高い上位10件まで取得</p>
+
+<h2>バッチ処理</h2>
+
+<hr>
+<p>ニュースは不定期に更新されるので定期的にバッチ処理を行って最新の記事を表示</p>
+
+<h3>バッチ処理インデックスの置換</h3>
+
+<div class="code-frame">
+<div class="code-lang"><span class="bold">replaceIndex.sh</span></div>
+<div class="highlight"><pre><code class="shellscript">  1 #!/bin/sh
+  2 AUTO_PATH=/home/mattun/AutoIndex
+  3 DEST_PATH=/opt
+  4
+  5 cd $DEST_PATH &gt; /dev/null 2&gt;&amp;1
+  6 if [ -d "newsIndex" ]
+  7 then
+  8  rm -rf newsIndex
+  9 fi
+ 10
+ 11 cd $AUTO_PATH
+ 12 java -jar AutoIndex.jar
+ 13 if [ -d "newsIndex" ]
+ 14 then
+ 15 | mv -f  newsIndex $DEST_PATH
+ 16 fi
+ 17
+ 18
+ 19
+ 20 LOG_FILE=autoIndex.log
+ 21
+ 22 # 変数定義
+ 23 LOG_DATE=`date '+%Y-%m-%d'`
+ 24 LOG_TIME=`date '+%H:%M:%S'`
+ 25
+ 26 # ログ出力実行
+ 27 printf "%-10s %-8s %-1s\n" \
+ 28 "${LOG_DATE}" "${LOG_TIME}" "$?"  &gt;&gt;${LOG_FILE}
+ 
+</code></pre></div>
+</div>
+
+<p>バッチ処理記事収集</p>
+
+<div class="code-frame">
+<div class="code-lang"><span class="bold">autoCollect.sh</span></div>
+<div class="highlight"><pre><code class="shellscript">  1 #!/bin/sh
+  2 AUTO_PATH=/home/mattun/AutoCollect/
+  3 cd $AUTO_PATH
+  4 java -jar AutoCollect.jar &gt; /dev/null 2&gt;&amp;1
+  5
+  6 LOG_FILE=autoCollect.log
+  7
+  8 # 変数定義
+  9 LOG_DATE=`date '+%Y-%m-%d'`
+ 10 LOG_TIME=`date '+%H:%M:%S'`
+ 11
+ 12 # ログ出力実行
+ 13 printf "%-10s %-8s %-1s\n" \
+ 14 "${LOG_DATE}" "${LOG_TIME}" "$?"  &gt;&gt;${LOG_FILE}
+~
+
+</code></pre></div>
+</div>
+
+<p>cronで定期的に実行</p>
+
+<div class="code-frame">
+<div class="code-lang"><span class="bold">crontab</span></div>
+<div class="highlight"><pre><code class="crontab">* 4 * * *  /home/mattun/AutoIndex/replaceIndex.sh
+* 3 * * *  /home/mattun/AutoCollect/autoCollect.sh
+
+</code></pre></div>
+</div>
+</div>
