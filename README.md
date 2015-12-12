@@ -1,3 +1,3 @@
 #portfolio
 
-release version
+"趣旨は完璧よりもできること!これからコードを綺麗に書くようにします"
