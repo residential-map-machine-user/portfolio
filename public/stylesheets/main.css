@@ -1,0 +1,14 @@
+#saved_pic{
+  border: 1px solid blue;
+}
+#drawer img{
+  border: 1px solid blue;
+}
+#drawer li{
+  list-style: none;
+}
+/*#pic_list{
+  height: 500px;
+  width:300px;
+  overflow: auto;
+}*/

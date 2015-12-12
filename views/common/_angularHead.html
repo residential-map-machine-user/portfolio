@@ -17,28 +17,47 @@
     <link rel="stylesheet" href="lib/angular/angular-csp.css" />
 
 
-    <!-- --------------- app init --------------- -->
 
     <title>onsen ui tab bar</title>
 
     <script>
-        angular.module('app', ['onsen'])
-        .factory('youtubeResult', function($http){
-          return {
+		var app = angular.module('myApp', ['onsen']);
+        app.factory('youtubeResult', function($http){
+			return {
+				searchYoutube : function(){
+					return $http.jsonp('http://localhost:3000/youtube?callback=JSON_CALLBACK').success(function(result){
+						return result;
+					});
+				}
+			}
+		})
+		app.factory('facebook', function($http){
+			console.log('face bok is requested');
+			return {
+				fetchMeFeed : function(){
+					return $http.jsonp('http://localhost:3000/facebook_me_feed?callback=JSON_CALLBACK').success(function(result){
+						return result;
+					})
+				}
+			}
+		})
 
-                    searchYoutube : function(){
-                      return $http.jsonp('http://localhost:3002/youtube?callback=JSON_CALLBACK')
-                        .success(function(result){
-                            return result;
-                          });
-                    }
-                  }
-          }).controller('AppController',['$scope','youtubeResult', function ($scope, youtubeResult) {
-            youtubeResult.searchYoutube().then(function(res){
-              console.log(res.data.items);
-              $scope.result = res.data.items;
-            });
-        }]);
+
+        app.controller('AppController',['$scope','youtubeResult','facebook', function ($scope, youtubeResult, facebook) {
+				$scope.fetchYoutube = function(){
+					<!-- youtubeResult.searchYoutube().then(function(res){ -->
+					<!-- 	console.log(res.data.items); -->
+					<!-- 	$scope.result = res.data.items; -->
+					<!-- }); -->
+				}
+				<!-- $scope.fetchFacebookFeed = function(){ -->
+					facebook.fetchMeFeed().then(function(res){
+						console.log(res.data);
+						$scope.result = res.data;
+					});
+				<!-- } -->
+		}])
+
     </script>
     
 

@@ -278,3 +278,7 @@ _:-ms-input-placeholder, :root .demo-graph {
   background-color:white;
   width:100%;
 }
+.simply-scroll-container { position:relative; }
+.simply-scroll-clip { position:relative; overflow:hidden; }
+.simply-scroll-list { margin:0; padding:0; overflow:hidden; }
+.simply-scroll-list li { float:left; width:150px; height:150px; margin:0; padding:0; list-style:none; }

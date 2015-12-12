@@ -1,0 +1,20 @@
+
+
+<html ng-app="app" lang="ja">
+  <% include ./common/_head.html %>
+  <body>
+    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+      <% include ./common/_bodyHeader.html %>
+      <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+        <% include ./common/_arrow.html %>
+        <% include ./common/_sidebar.html %>
+      </div>
+      <main class="mdl-layout__content mdl-color--grey-100">
+    <script src="/scripts/index.js"></script>
+
+        <% include ./common/_dokopro_detail.html %>
+      </main>
+    </div>
+      <!-- <a href="https://github.com/google/material-design-lite/blob/master/templates/dashboard/" target="_blank" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">View Source</a> -->
+  </body>
+</html>

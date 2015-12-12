@@ -1,0 +1,117 @@
+<div id="drawer">
+        <section>
+            <h1>Canvas</h1>
+            <nav>
+                <!-- 線の色を変更するHTML要素 -->
+                <!-- 線の太さを変更するHTML要素 -->
+                <button id="clear_btn">クリアー</button>
+            </nav>
+            <canvas id="drowarea" width="500" height="500" style="border:1px solid blue;"></canvas>
+        </section>
+        <div class="adjust">
+            <input id="pencil_size" type="range" name="weight" value="0" min="0" max="30">
+            <input type="button" id="save_button" name="name" value="保存">
+        </div>
+        <div id="pic_list">
+
+        </div>
+    </div>
+
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <script>
+        var image_count = 0;
+        var image_array = [];
+        //初期化
+        var canvas_mouse_event = false;
+        var txy = 10;
+        var oldX = 0; //１つ前の座標を代入するための変数
+        var oldY = 0; //１つ前の座標を代入するための変数
+        var bold_line = 3; //ラインの太さをここで指定
+        var color = "#000"; //ラインの色をここで指定
+
+        //エレメントの取得
+        var pencil_size = $("#pencil_size");
+
+
+        //イベントの設置
+        pencil_size.on("input change", function() {
+            bold_line = pencil_size.val();
+        });
+
+        //------------------------------------------------
+        var can = $("#drowarea")[0];
+        var context = can.getContext("2d");
+        //------------------------------------------------
+
+        if (localStorage.getItem("image_count")) {
+            image_count = parseInt(localStorage.getItem("image_count"));
+            console.log("ローカルストレージ画像数:" + image_count);
+            for (var i = 1; i < image_count + 1; i++) {
+                $("#pic_list").append("<img id=\"pic_list_" + i + "\"" + ">");
+                var base64 = localStorage["pic_list_" + i];
+                console.log(base64);
+                $("#pic_list_" + i).attr("src", base64);
+            }
+        }
+
+        var save_button = $("#save_button").on("click", function() {
+            console.log(localStorage.getItem("image_count"));
+            image_count++;
+            $("#pic_list").append("<img id=\"pic_list_" + image_count + "\"" + ">");
+            var Base64Coded = can.toDataURL();
+            $("#pic_list_" + image_count).attr("src", Base64Coded);
+            localStorage["pic_list_" + image_count] = Base64Coded;
+            localStorage.setItem("image_count", image_count);
+        });
+        //MouseDown：フラグをTrue
+        //-----------------------------------------------
+        $(can).on("mousedown", function(e) {
+            oldX = e.offsetX; //MOUSEDOWNしたX横座標取得
+            oldY = e.offsetY - txy; //MOUSEDOWN Y高さ座標取得
+            canvas_mouse_event = true;
+        });
+        //-----------------------------------------------
+        //上5つのスクリプトを記述します。
+
+
+        //MouseMove：
+        //----------------------------------------------
+        $(can).on("mousemove", function(e) {
+            if (canvas_mouse_event == true) {
+                var px = e.offsetX;
+                var py = e.offsetY - txy;
+                context.strokeStyle = color;
+                context.lineWidth = bold_line;
+                context.beginPath();
+                context.lineJoin = "round";
+                context.lineCap = "round";
+                context.moveTo(oldX, oldY);
+                context.lineTo(px, py);
+                context.stroke();
+                context.closePath();
+                oldX = px;
+                oldY = py;
+            }
+        });
+
+        //MouseUp：フラグをfalse
+        //------------------------------------------------
+        $(can).on("mouseup", function(e) {
+            canvas_mouse_event = false;
+        });
+        //------------------------------------------------
+        ∫∫∫
+
+        //クリアーボタンAction
+        //-----------------------------------------------------------------
+        $("#clear_btn").on("click", function() {
+            context.beginPath();
+            context.clearRect(0, 0, can.width, can.height);
+            for (var i = 1; i < image_count + 1; i++) {
+                $("#pic_list_" + i).remove();
+            }
+            localStorage.clear();
+            image_count = 0;
+        });
+        //-----------------------------------------------------------------
+    </script>

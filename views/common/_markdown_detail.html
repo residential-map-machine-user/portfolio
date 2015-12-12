@@ -1,0 +1,32 @@
+<div class="mdl-cell--12-col self_padding-20">
+
+	<h1>Electron MarkdownViewer</h1>
+	<hr>
+<a href="https://github.com/shghdyji/dokopro" target="_blank" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">View Source</a>
+	<h3>作成するきっかけ</h3>
+
+	<hr>
+	<p>node.jsのoworkshopper "learnyounode"を全て完了して今はやりのElectronを使用して<br>
+		デスクトップアプリを作成しようと思った。</p>
+
+	<h3>要件</h3>
+
+	<hr>
+	<ol>
+		<li>markdownで書いたファイルをパースしてhtmlに変換</li>
+		<li>階層構造を実現して何に関する記事なのかをわかりやすくする。</li>
+		<li>sqliteを使ってデータベースごと配布できるようにする。　</li>
+	</ol>
+
+	<h3>仕様</h3>
+
+	<hr>
+	<p>プロジェクトルート以下のcontentsディレクトリにmarkdownファイルを保存。</p>
+
+	<div class="code-frame"><div class="highlight"><pre><code>contents/java/java8/stream.md
+				</code></pre></div></div>
+
+	<p>こうすることで次のように階層構造を表現する。</p>
+<img src="/images/markdview.png" alt=""></img>
+	<h3>P.SマークダウンエディターのKobitoを知ったので開発はviewerとしての機能だけて終了。</h3>
+</div>

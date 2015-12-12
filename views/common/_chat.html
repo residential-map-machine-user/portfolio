@@ -1,108 +1,171 @@
-<div class="mdl-grid demo-content">
-  <div class="demo-charts mdl-color-white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid clearfix">
-    <ons-tabbar >
-        <ons-tab active="true" page="home.html">
-            <div class="tab">
-                <ons-icon icon="comment" class="tab-icon"></ons-icon>
-                <div class="tab-label">Comment</div>
-            </div>
-        </ons-tab>
 
-        <ons-tab page="settings.html">
-            <div class="tab">
-                <ons-icon icon="ion-gear-a" class="tab-icon"></ons-icon>
-                <div class="tab-label">Settings</div>
-            </div>
-        </ons-tab>
-    </ons-tabbar>
+<style>
+	ons-tabbar{
+		width:400px;
+		position: fixed;
+		top:100px;
+		left: 260px;
+		margin:0 auto;
+		text-align:center;
+	}
+	@media screen and (max-width: 1024px){
+		ons-tabbar{
+			left:0;
+			width:400px;
+			margin:0 auto;
+			text-align: center;
+		}
+	}
+</style>
+<div ng-app="myApp">
+	<div class="mdl-grid demo-content">
+		<div ng-controller="AppController">
+			<div class="demo-charts mdl-color-white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid clearfix">
+				<ons-tabbar >
+					<ons-tab active="true" page="home.html">
+						<div class="tab">
+							<ons-icon icon="comment" class="tab-icon"></ons-icon>
+							<div class="tab-label">Comment</div>
+						</div>
+					</ons-tab>
 
-    <ons-template id="home.html">
-        <ons-navigator>
-            <ons-page>
-                <ons-toolbar>
-                    <div class="left"><ons-toolbar-button ng-click="doSomething()"><ons-icon icon="ion-compose"></ons-icon></ons-toolbar-button></div>
-                    <div class="center">Home</div>
-                    <div class="right"></div>
-                </ons-toolbar>
-                <script >
-                </script>
-                <ons-list style="margin: -1px 0">
-                    <ons-list-item modifier="chevron" ng-repeat="youtubeItem in result" class="item" ng-click="doSomething()">
-                        <ons-row>
-                            <ons-col width="60px">
-                              <div class="item-thum" style="background-image:url({{ youtubeItem.snippet.thumbnails.default.url }})"></div>
-                            </ons-col>
-                            <ons-col>
-                                <header>
-                                  <span class="item-title">{{ youtubeItem.snippet.title}}</span>
-                                    <span class="item-label">5h</span>
-                                </header>
-                                <p class="item-desc">{{ youtubeItem.snippet.description}} </p>
-                            </ons-col>
-                        </ons-row>
-                    </ons-list-item>
-                </ons-list>
-                <input class="text-input" type="text" id='my-textinput'>
-            </ons-page>
-        </ons-navigator>
-    </ons-template>
+					<ons-tab page="settings.html">
+						<div class="tab">
+							<ons-icon icon="ion-gear-a" class="tab-icon"></ons-icon>
+							<div class="tab-label">Settings</div>
+						</div>
+					</ons-tab>
+				</ons-tabbar>
 
-    <ons-template id="settings.html">
-        <ons-page>
-            <ons-toolbar>
-                <div class="center">Settings</div>
-            </ons-toolbar>
+				<ons-template id="home.html">
+					<ons-navigator>
+						<ons-page>
+							<ons-toolbar>
+								<div class="left"><ons-toolbar-button ng-click="fetchYoutube()"><ons-icon icon="ion-compose"></ons-icon></ons-toolbar-button></div>
+								<div class="center">Home</div>
+								<div class="right"></div>
+							</ons-toolbar>
+							<script >
+							</script>
+							<style>
+								video{
+									width:100%;
+									height:auto;
+								}
+							
+							</style>
+							<ons-list>
+							
+							<video src="/videos/introduction.webm"controls></video>
+								<ons-list-item id='message-list' modifier="chevron" class="item" ng-click="fetchYoutube()">
+									<ons-row>
+										<ons-col width="60px">
+											<div class="item-thum" style="background-image:url({{ youtubeItem.snippet.thumbnails.default.url }})"></div>
+										</ons-col>
+										<ons-col>
+											<header>
+												<span class="item-title">Introductino movie</span>
+												<span class="item-label">1min</span>
+											</header>
+											<p class="item-desc">この動画はある発表会ようにとったものです。残念ながらそこまで凝ったものでもありません笑</p>
+										</ons-col>
+									</ons-row>
+								</ons-list-item>
+							</ons-list>
+							<!-- <ons-list style="margin: -1px 0"> -->
+								<!-- <ons-list-item ng-show="facebook.story.length > 0 || facebook.message.length > 0"id='message-list' modifier="chevron" ng-repeat="facebook in result " class="item" ng-click="fetchYoutube()"> -->
+								<!-- 	<ons-row > -->
+								<!-- 		<ons-col width="60px"> -->
+								<!-- 			<div class="item-thum" style="background-image:url('images/fb_icon.ico'); background-size:100% 100%;"></div> -->
+								<!-- 		</ons-col> -->
+								<!-- 		<ons-col > -->
+								<!-- 			<header> -->
+								<!-- 				<span class="item-title">{{ }}</span> -->
+								<!-- 				<span class="item-label">5h</span> -->
+								<!-- 			</header> -->
+								<!-- 			<p class="item-desc" ng-show="facebook.story.length > 0">{{facebook.story }} </p> -->
+								<!-- 			<p class="item-desc" ng-show="facebook.message.length > 0">{{facebook.message }} </p> -->
+								<!-- 		</ons-col> -->
+								<!-- 	</ons-row> -->
+								<!-- </ons-list-item> -->
 
-            <ons-row class="profile-wrapper">
-                <ons-col width="60px" class="profile-image-wrapper">
-                    <div class="profile-image"></div>
-                </ons-col>
+								<!-- <ons-list-item id='message-list' modifier="chevron" ng-repeat="youtubeItem in result" class="item" ng-click="fetchYoutube()"> -->
+								<!-- 	<ons-row> -->
+								<!-- 		<ons-col width="60px"> -->
+								<!-- 			<div class="item-thum" style="background-image:url({{ youtubeItem.snippet.thumbnails.default.url }})"></div> -->
+								<!-- 		</ons-col> -->
+								<!-- 		<ons-col> -->
+								<!-- 			<header> -->
+								<!-- 				<span class="item-title">{{ youtubeItem.snippet.title}}</span> -->
+								<!-- 				<span class="item-label">5h</span> -->
+								<!-- 			</header> -->
+								<!-- 			<p class="item-desc">{{ youtubeItem.snippet.description}} </p> -->
+								<!-- 		</ons-col> -->
+								<!-- 	</ons-row> -->
+								<!-- </ons-list-item> -->
+							<!-- </ons-list> -->
+						</ons-page>
+					</ons-navigator>
+				</ons-template>
 
-                <ons-col>
-                    <div class="profile-name">Foobar</div>
-                    <div class="profile-email">foobar@example.com</div>
-                </ons-col>
+				<ons-template id="settings.html">
+					<ons-page>
+						<ons-toolbar>
+							<div class="center">Settings</div>
+						</ons-toolbar>
 
-            </ons-row>
+						<ons-row class="profile-wrapper">
+							<ons-col width="60px" class="profile-image-wrapper">
+								<div class="profile-image"></div>
+							</ons-col>
 
-            <div class="settings-header">Share</div>
+							<ons-col>
+								<div class="profile-name">Foobar</div>
+								<div class="profile-email">foobar@example.com</div>
+							</ons-col>
 
-            <ons-list modifier="inset" class="settings-list">
-                <ons-list-item>
-                    Twitter
-                    <ons-switch modifier="list-item"></ons-switch>
-                </ons-list-item>
+						</ons-row>
 
-                <ons-list-item>
-                    Facebook
-                    <ons-switch modifier="list-item" checked></ons-switch>
-                </ons-list-item>
-            </ons-list>
+						<div class="settings-header">Share</div>
 
-            <div class="settings-header">Others</div>
+						<ons-list modifier="inset" class="settings-list">
+							<ons-list-item>
+								Twitter
+								<ons-switch modifier="list-item"></ons-switch>
+							</ons-list-item>
 
-            <ons-list modifier="inset" class="settings-list">
-                <ons-list-item modifier="chevron" ng-click="doSomething()">
-                    Terms of Service
-                </ons-list-item>
+							<ons-list-item>
+								Facebook
+								<ons-switch modifier="list-item" checked></ons-switch>
+							</ons-list-item>
+						</ons-list>
 
-                <ons-list-item modifier="chevron" ng-click="doSomething()">
-                    Privacy Policy
-                </ons-list-item>
-            </ons-list>
+						<div class="settings-header">Others</div>
 
-            <br>
+						<ons-list modifier="inset" class="settings-list">
+							<ons-list-item modifier="chevron" ng-click="fetchYoutube()">
+								Terms of Service
+							</ons-list-item>
 
-            <ons-list modifier="inset" class="settings-list">
-                <ons-list-item modifier="tappable" ng-click="doSomething()">
-                    <ons-icon icon="ion-log-out" style="opacity: 0.8"></ons-icon>
-                    Sign out
-                </ons-list-item>
-            </ons-list>
+							<ons-list-item modifier="chevron" ng-click="fetchYoutube()">
+								Privacy Policy
+							</ons-list-item>
+						</ons-list>
 
-            <br>
+						<br>
 
-        </ons-page>
-    </ons-template>
- </div> 
+						<ons-list modifier="inset" class="settings-list">
+							<ons-list-item modifier="tappable" ng-click="fetchYoutube()">
+								<ons-icon icon="ion-log-out" style="opacity: 0.8"></ons-icon>
+								Sign out
+							</ons-list-item>
+						</ons-list>
+
+						<br>
+
+					</ons-page>
+				</ons-template>
+			</div>
+		</div> 
+	</div>
 </div>
