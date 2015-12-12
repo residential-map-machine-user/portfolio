@@ -16,6 +16,14 @@
 			text-align: center;
 		}
 	}
+	@media screen and (max-width:400px){ 
+		ons-tabbar{
+			width:90%;
+			height:90%;
+			margin:0 auto;
+			text-align: center;
+		}
+	}
 </style>
 <div ng-app="myApp">
 	<div class="mdl-grid demo-content">
@@ -24,17 +32,17 @@
 				<ons-tabbar >
 					<ons-tab active="true" page="home.html">
 						<div class="tab">
-							<ons-icon icon="comment" class="tab-icon"></ons-icon>
-							<div class="tab-label">Comment</div>
+							<ons-icon icon="ion-play" class="tab-icon"></ons-icon>
+							<div class="tab-label">Movie</div>
 						</div>
 					</ons-tab>
 
-					<ons-tab page="settings.html">
-						<div class="tab">
-							<ons-icon icon="ion-gear-a" class="tab-icon"></ons-icon>
-							<div class="tab-label">Settings</div>
-						</div>
-					</ons-tab>
+					<!-- <ons-tab page="settings.html"> -->
+					<!-- 	<div class="tab"> -->
+					<!-- 		<ons-icon icon="ion-gear-a" class="tab-icon"></ons-icon> -->
+					<!-- 		<div class="tab-label">Settings</div> -->
+					<!-- 	</div> -->
+					<!-- </ons-tab> -->
 				</ons-tabbar>
 
 				<ons-template id="home.html">
