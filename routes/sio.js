@@ -10,7 +10,7 @@ function sio(server){
 		socket.emit("receive_message_log", messages)
 		socket.on("sendmessage", function (data) {
 			console.log(data);
-			socket.emit("servermessage",data)
+			socket.broadcast.emit("servermessage",data)
 		})
   });
 }

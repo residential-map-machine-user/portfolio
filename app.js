@@ -33,6 +33,9 @@ app.use('/users', users);
 app.use('/message', function (req, res) {
 		res.render('message.html', {});
 })
+app.use('/order', function (req, res) {
+	res.render('order.html', {});
+})
 app.use('/detail/dokopro', function (req, res) {
 		res.render('dokopro_detail.html', {});
 })
@@ -47,6 +50,9 @@ app.use('/detail/sens', function (req, res) {
 })
 app.use('/detail/drawer', function (req, res) {
 		res.render('drawer_detail.html', {});
+})
+app.use('/detail/kimono', function (req, res) {
+		res.render('kimono_detail.html', {});
 })
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
