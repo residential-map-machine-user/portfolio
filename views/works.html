@@ -11,9 +11,24 @@
       <main class="mdl-layout__content mdl-color--grey-100">
     <script src="scripts/index.js"></script>
 
+        <a id="call"href="#">call</a>
         <% include ./common/_works.html %>
       </main>
     </div>
   </body>
     <script src="/material.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.1.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $('#call').on('click', function(){
+          $.ajax({
+              type:"GET",
+              url:"/call",
+              
+          }).done(function(){
+            console.log(('hello'))
+          })
+        })
+      })
+    </script>
 </html>
